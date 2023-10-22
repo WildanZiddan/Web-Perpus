@@ -19,8 +19,8 @@ body {
 
 .container {
     background-color: #FFFFFF;
-    width: 65vh;
-    height: 50vh;
+    width: 50vh;
+    height: 40vh;
     text-align: center;
     border-radius: 25px;
     color: #000000;
@@ -28,15 +28,16 @@ body {
 
 h2 {
     margin-top: 5vh;
+    margin-bottom: 1.5vh;
     font-weight: 600;
     font-size: 30px;
 }
 
 .form {
-    padding: 5% 2%;
+    padding: 1% 2%;
 }
 
-input {
+.input {
     width: 80%;
     height: 6vh;
     border-radius: 8px;
@@ -48,7 +49,7 @@ input {
     border: none;
 }
 
-input:focus {
+.input:focus {
     border-radius: 8px;
     padding: 0 8px;
     outline-style: none;
@@ -57,7 +58,7 @@ input:focus {
 
 }
 
-input::placeholder{
+.input::placeholder{
     color: #EEE2DE;
 }
 
@@ -75,44 +76,4 @@ input::placeholder{
     color: #34A853;
     background-color: rgba(151, 151, 151, 0.5);
     cursor: pointer;
-}
-
-.signup {
-    color: #000000;
-}
-
-.link {
-    text-decoration: none;
-    color: #000000;
-    transition: all .4s;
-}
-
-.link:hover {
-    color: #34A853;
-}
-@media screen and (max-width: 480px) {
-    .container {
-        margin: 51.6% 16%;
-        background-color: rgba(252, 79, 0, .7);
-        width: 60vh;
-        height: 40vh;
-        text-align: center;
-        border-radius: 15px;
-        color: white;
-    }
-    h2 {
-        margin-top: 2vh;
-    }
-    .form {
-        margin-top: 0;
-        padding: 15% 2%;
-    }
-    input {
-        width: 35vh;
-        height: 4vh;
-        border-radius: 8px;
-        padding: 0 8px;
-        border: none;
-        outline-style: none;
-    }
 }
