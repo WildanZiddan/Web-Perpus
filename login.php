@@ -1,46 +1,26 @@
 <?php
 session_start();
-if (isset($_SESSION['admin_username'])) {
-    header("location:homesiswa.php");
+if(isset($_SESSION['username']))
+{
+    $_SESSION['username'] = $_SERVER['REQUEST_URI'];
+    $_SESSION['username'] = true;
+    header("Location:homesiswa.php");
+    exit;
 }
 
 include("connection.php");
-$username = "";
-$password = "";
-$error = "";
+if (isset($_POST['Login'])){
+    $username = mysqli_real_escape_string($connection, $_POST['username']);
+    $password = $_POST['password'];
+    $select = "SELECT * FROM admin WHERE username = '$username' && password = '$password'";
+    $result = mysqli_query($connection, $select);
 
-if (isset($_POST['Login'])) {
-    $username   = $_POST['username'];
-    $password   = $_POST['password'];
-
-    if($username == '' or $password == ''){
-        $error .= "<li>Please add your username and password</li>";
-    }
-    if(empty($error)){
-        $sql1 = "select * from admin where username = '$username'";
-        $q1 = mysqli_query($connection, $sql1);
-        $r1 = mysqli_fetch_array($q1);
-        if($r1['password'] != md5($password)){
-            $error .= "<li>Wrong password!</li>";
-        }
-    }
-    if(empty($error)){
-        $login_id = $r1['login_id'];
-        $sql1 = "select * from admin_access where login_id = '$login_id'";
-        $q1 = mysqli_query($connection, $sql1);
-        while ($r1 = mysqli_fetch_array($q1)){
-            $access[] = $r1['access_id']; //baca role admin, guru, siswa
-        }
-        if(empty($access)){
-            $error .= "<li>You don't have an access to admin page!</li>";
-        }
-    }
-
-    if(empty($error)){
-        $_SESSION['admin_username'] = $username;
-        $_SESSION['admin_access'] = $access;
-        header("location:homesiswa.php");
-        exit();
+    if(mysqli_num_rows($result) > 0 ){
+        $row = mysqli_fetch_array($result);
+        $name = $row['username'];
+        $_SESSION['username'] = $name;
+        header('location:homesiswa.php');
+        exit;
     }
 }
 ?>
@@ -56,13 +36,8 @@ if (isset($_POST['Login'])) {
 <body>
     <div class="container">
         <h2>Login</h2>
-        <?php
-            if ($error) {
-                echo "<ul>$error</ul>";
-            }
-        ?>
         <form class="form" action="" method="post">
-            <input type="text" value="<?php echo $username ?>" name="username" class="input"  placeholder="Nama" required><br><br>
+            <input type="text" name="username" class="input"  placeholder="Nama" required><br><br>
 
             <input type="password" name="password" placeholder="Kata sandi" class="input" ><br><br>
 
