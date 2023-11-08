@@ -1,5 +1,5 @@
 <?php
-session_start();
+session_start(); //Ensure the session is started
 include("connection.php");
 if (!isset($_SESSION['username'])) {
     header("location:login.php");
@@ -16,7 +16,7 @@ if (!isset($_SESSION['username'])) {
     <title>Document</title>
     <link rel="stylesheet" href="./CSS/home.css">
 
-    <script  text="text/javascript">
+    <script text="text/javascript">
       window.history.forward();
     </script>
 </head>

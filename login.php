@@ -4,7 +4,7 @@ if(isset($_SESSION['username']))
 {
     $_SESSION['username'] = $_SERVER['REQUEST_URI'];
     $_SESSION['username'] = true;
-    header("Location:homesiswa.php");
+    header("Location:home.php");
     exit;
 }
 
@@ -19,7 +19,7 @@ if (isset($_POST['Login'])){
         $row = mysqli_fetch_array($result);
         $name = $row['username'];
         $_SESSION['username'] = $name;
-        header('location:homesiswa.php');
+        header('location:home.php');
         exit;
     }
 }
